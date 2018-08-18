@@ -1,8 +1,12 @@
 function setup() {
 
+	drawQuadrants = true;
+	quadStroke = 2;
+	pointSize = 4;
+
 	createCanvas(windowWidth, windowHeight);
 
-	shape1 = new Circ(windowWidth/2, windowHeight/2, 100);
+	qt = new QuadTree(20, 20, windowWidth - 40, windowHeight - 40, 1);
 
 }
 
@@ -10,39 +14,36 @@ function draw() {
 
 	background(255);
 
-	shape2 = new Circ(mouseX, mouseY, 200, 200);
-	point1 = new Pnt(mouseX, mouseY);
+	//Draw QuadTree Boundary
+	fill(0);
+	noStroke();
+	rect(qt.r.x - quadStroke/2, qt.r.y - quadStroke/2, qt.r.w + quadStroke, qt.r.h + quadStroke);
 
-	noFill();
-	stroke(0);
-	strokeWeight(3);
+	//Draw Quadrants
+	fill(0);
+	noStroke();
 
-	ellipse(shape1.x, shape1.y, shape1.r2, shape1.r2, 4);
-	ellipse(shape2.x, shape2.y, shape2.r2, shape2.r2, 4);
+	if (drawQuadrants) {
+		let quadrants = qt.getLeaves();
 
-	strokeWeight(4);
-	stroke(0, 255, 0);
-
-	if (shape1.intersects(shape2)) {
-
-		ellipse(shape1.x, shape1.y, shape1.r2, shape1.r2, 4);
-
+		for (let q of quadrants) {
+			fill(0);
+			rect(q.r.x, q.r.y, q.r.w, q.r.h);
+			fill(255);
+			rect(q.r.x + quadStroke/2, q.r.y + quadStroke/2, q.r.w - quadStroke, q.r.h - quadStroke);
+		}
 	}
 
-	if (shape2.intersects(shape1)) {
-
-		ellipse(shape2.x, shape2.y, shape2.r2, shape2.r2, 4);
-
+	//Draw points
+	fill(0);
+	let points = qt.getPoints();
+	for (let p of points) {
+		ellipse(p.x, p.y, pointSize);
 	}
+}
 
-	strokeWeight(5);
-	stroke(255, 0, 0);
+function mouseClicked() {
 
-	if (shape1.contains(point1)) {
-
-		ellipse(shape1.x, shape1.y, shape1.r2, shape1.r2, 4);
-
-	}
-
+	qt.ins(new Pnt(mouseX, mouseY));
 
 }

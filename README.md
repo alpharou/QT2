@@ -3,5 +3,4 @@ Extended and cleaner version of QT2. Implement a quadtree for efficient particle
 
 TODO LIST:
 
-To actually write the QuadTree.
-To get the interface running.
+To write the GUI for mobile control.

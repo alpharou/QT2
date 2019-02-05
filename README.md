@@ -1,5 +1,7 @@
 # QT2
-Extended and cleaner version of QT2. Implement a quadtree for efficient particle interaction.
+Extended and cleaner version of QT1. Focuses on splitting rectangles to accomodate dataPoints, and trigger personal zone checks.
+
+https://alpharou.github.io/QT2/
 
 TODO LIST:
 

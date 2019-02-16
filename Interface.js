@@ -1,18 +1,19 @@
 function setup() {
 
+	//General variables
 	drawQuadrants = true;
 	quadStroke = 2;
 	pointSize = 4;
+	
+	qt = new QuadTree(20, 20, windowWidth - 40, windowHeight - 40, 1);
 
 	createCanvas(windowWidth, windowHeight);
-
-	qt = new QuadTree(20, 20, windowWidth - 40, windowHeight - 40, 1);
 
 }
 
 function draw() {
 
-	background(255);
+	background(170);
 
 	//Draw QuadTree Boundary
 	fill(0);
@@ -46,4 +47,12 @@ function mouseClicked() {
 
 	qt.ins(new Pnt(mouseX, mouseY));
 
+}
+
+function windowResized() {
+	
+	//The quadtree is NOT resizable because it initializes the
+	//regions statically based on the initial resolution
+	return;
+	
 }
